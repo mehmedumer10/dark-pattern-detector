@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Exclusive Member Offer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f0f2f5;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.4;
+      padding: 20px;
+    }
+    .top-banner {
+      background: #e9ecef;
+      color: #2c3e2f;
+      text-align: center;
+      padding: 8px;
+      border-radius: 48px;
+      margin-bottom: 28px;
+      font-size: 0.75rem;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .card {
+      background: white;
+      border-radius: 28px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 20px 24px 8px 24px;
+      border-bottom: 1px solid #eef2f6;
+    }
+    .card-header h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+    .card-body {
+      padding: 20px 24px 24px 24px;
+    }
+    button, .btn {
+      cursor: pointer;
+      font-weight: 600;
+      border: none;
+      transition: 0.1s linear;
+    }
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.2s;
+    }
+    .modal-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .modal-inner {
+      background: white;
+      max-width: 380px;
+      border-radius: 32px;
+      padding: 28px 24px;
+      text-align: center;
+      box-shadow: 0 25px 40px rgba(0,0,0,0.2);
+    }
+    .modal-inner p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+    .modal-actions button {
+      padding: 10px 18px;
+      border-radius: 60px;
+      font-weight: 600;
+    }
+    .btn-outline {
+      background: #e9ecef;
+      color: #1f2a3e;
+    }
+    .btn-primary {
+      background: #1e6f3f;
+      color: white;
+    }
+    .special-box {
+      background: #fef4e8;
+      padding: 16px;
+      border-radius: 24px;
+      margin-top: 12px;
+    }
+    .tiny-link {
+      font-size: 0.7rem;
+      color: #8b8f9b;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .fake-loading {
+      background: #f1f3f7;
+      padding: 12px;
+      border-radius: 32px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #5f6c80;
+    }
+    .offer-row {
+      background: #fff0db;
+      border-left: 5px solid #e67e22;
+      padding: 14px 16px;
+      border-radius: 20px;
+      margin: 16px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .check-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 12px 0;
+      background: #f8f9fc;
+      padding: 10px;
+      border-radius: 24px;
+    }
+    .fine-print {
+      font-size: 0.85rem;
+      color: #a00;
+    }
+    .old-price {
+      text-decoration: line-through;
+      color: #a0a5b1;
+      font-size: 0.85rem;
+    }
+    .countdown-box {
+      background: #fee2e2;
+      padding: 10px;
+      border-radius: 60px;
+      text-align: center;
+      font-weight: bold;
+      color: #b91c1c;
+      font-size: 0.8rem;
+    }
+    .cancel-area {
+      background: #f2f0fa;
+      padding: 16px;
+      border-radius: 24px;
+    }
+    .cancel-area select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 40px;
+      border: 1px solid #ccc;
+      background: white;
+    }
+    .hint-text {
+      font-size: 0.75rem;
+      color: #4a5b6e;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-banner">
+  🎁 Limited time member benefits
+</div>
+
+<div class="container">
+  
+  <!-- Card 1: Trial offer with pressure -->
+  <div class="card">
+    <div class="card-header">
+      <h2>🎁 Exclusive Member Offer</h2>
+    </div>
+    <div class="card-body">
+      <p>Click below to get your <strong>FREE trial</strong> (first 7 days). No credit card required!</p>
+      <button id="btnAction1" style="background:#0a5c3e; color:white; padding:14px 28px; border-radius:60px; width:100%; font-size:1.2rem;">✔️ YES, claim my free gift</button>
+      <div style="margin-top:12px; text-align:center;">
+        <span id="skipLink" style="font-size:0.75rem; color:#aaafbc; text-decoration:underline; cursor:pointer;">No thanks, I don't want to save 50%</span>
+      </div>
+      <div id="msgArea1" style="margin-top:12px; font-size:0.8rem; min-height: 40px; color:#b85c00;"></div>
+    </div>
+  </div>
+
+  <!-- Card 2: Pre-checked extras + hidden costs -->
+  <div class="card">
+    <div class="card-header">
+      <h2>💎 Premium Plan – Best Deal</h2>
+    </div>
+    <div class="card-body">
+      <div class="offer-row">
+        <span><strong>Pro Monthly</strong> <span class="old-price">$29.99</span> <span style="color:#c0392b;">$9.99</span>/month</span>
+        <span style="background:#e67e22; padding:4px 12px; border-radius:40px; color:white;">SAVE 67%</span>
+      </div>
+      <div class="check-group">
+        <input type="checkbox" id="chkExtra1" checked style="width:18px; height:18px;">
+        <label for="chkExtra1">✔️ Add "PrivacyShield Plus" (+$4.99/mo) – Recommended for security</label>
+      </div>
+      <div class="check-group">
+        <input type="checkbox" id="chkExtra2" checked>
+        <label for="chkExtra2">🔒 Bill yearly instead of monthly (Save $20/year, but auto-renew at $99)</label>
+      </div>
+      <div class="fine-print">⚠️ Uncheck boxes above to opt-out of extra services. (Pre-checked by default)</div>
+      <button id="btnCheckout" style="background:#2c3e66; width:100%; padding:14px; border-radius:60px; color:white; font-weight:bold; margin-top:8px;">PROCEED TO CHECKOUT →</button>
+      <div id="checkoutMsg" class="hint-text" style="margin-top:12px;"></div>
+    </div>
+  </div>
+
+  <!-- Card 3: Hard-to-cancel maze -->
+  <div class="card">
+    <div class="card-header">
+      <h2>📧 Newsletter & Billing Portal</h2>
+    </div>
+    <div class="card-body">
+      <p>You are subscribed to "Daily Deals Premium" (billed $14.99/mo starting in 3 days).</p>
+      <div class="special-box">
+        <span>👇 Cancel subscription (4-step process):</span>
+        <div style="margin-top: 12px;">
+          <button id="startCancelBtn" style="background:#e2e6ea; padding:8px 18px; border-radius:50px;">Cancel plan</button>
+        </div>
+        <div id="stepsContainer" style="margin-top: 16px; display: none;">
+          <div id="stepA" class="fake-loading" style="margin-bottom:8px;">Step 1: Why are you leaving? <select id="reasonList"><option>Too expensive</option><option>Don't use features</option><option>Just because</option></select> <button id="stepNext1" style="margin-top:6px;">Next →</button></div>
+          <div id="stepB" style="display:none;" class="fake-loading">Step 2: Would you stay for 40% off? <button id="keepOffer" style="background:#f39c12; margin-left:8px;">Yes, keep me!</button> <button id="continueStep">No, continue</button></div>
+          <div id="stepC" style="display:none;" class="fake-loading">Step 3: We're sorry! Click "Confirm Cancellation" below (tiny link). <span id="finalCancel" style="display:block; font-size:0.7rem; margin-top:5px; text-decoration:underline; cursor:pointer;">🗑️ confirm cancellation (click here)</span></div>
+          <div id="cancelResultMsg" style="margin-top:10px; font-weight:bold;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 4: Fake urgency / scarcity -->
+  <div class="card">
+    <div class="card-header">
+      <h2>⏰ FLASH SALE – 87% OFF</h2>
+    </div>
+    <div class="card-body">
+      <div class="countdown-box" id="timerDisplay">🔥 Offer ends in 00:03:22 🔥</div>
+      <div style="margin: 16px 0; background:#fffaec; padding:10px; border-radius:20px;">
+        <span>🚨 Only <span id="stockCount">3</span> items left at this price! <span id="viewerCount">29 people</span> are viewing this deal.</span>
+      </div>
+      <button id="buyNowTrigger" style="background:#c0392b; width:100%; padding:16px; border-radius:60px; font-weight:bold; color:white;">🛒 BUY NOW – PRICE LOCK</button>
+      <div class="tiny-link" id="resetTimer" style="text-align:right; margin-top:8px;">(refresh timer demo)</div>
+    </div>
+  </div>
+
+  <!-- Card 5: Tricky privacy controls -->
+  <div class="card">
+    <div class="card-header">
+      <h2>🔐 Privacy preferences</h2>
+    </div>
+    <div class="card-body">
+      <p>Customize your data sharing:</p>
+      <div class="check-group">
+        <input type="checkbox" id="optDataShare" checked> <label for="optDataShare">Share my data for personalized ads (Required for basic service)</label>
+      </div>
+      <div class="check-group">
+        <input type="checkbox" id="optDataSell" checked> <label for="optDataSell">Allow selling of anonymous data to partners</label>
+      </div>
+      <div class="fine-print">💡 Unchecking "Share my data" will disable your account features (requires premium upgrade).</div>
+      <button id="saveSettings" style="background:#6c757d; padding:10px; border-radius:40px; width:100%;">Save preferences</button>
+      <div id="settingsFeedback" style="font-size:0.7rem; margin-top:8px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for confirm-shaming -->
+<div id="dynamicModal" class="modal-overlay">
+  <div class="modal-inner">
+    <p>😢 Are you sure you want to miss this limited free trial?</p>
+    <p style="font-size:0.8rem;">Most successful members started with their trial. Without it, you pay full price later.</p>
+    <div class="modal-actions">
+      <button id="modalLeave" class="btn-outline">Yes, I'm sure</button>
+      <button id="modalStay" class="btn-primary">Stay & claim free gift</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ---- helper: no obvious pattern names ----
+  const modal = document.getElementById('dynamicModal');
+  const modalLeave = document.getElementById('modalLeave');
+  const modalStay = document.getElementById('modalStay');
+  const msgBox = document.getElementById('msgArea1');
+  const declineTrigger = document.getElementById('skipLink');
+  const claimBtn = document.getElementById('btnAction1');
+  const cancelStepsDiv = document.getElementById('stepsContainer');
+  
+  function showModal(){ modal.classList.add('active'); }
+  function hideModal(){ modal.classList.remove('active'); }
+  
+  declineTrigger.addEventListener('click', (e) => {
+    e.preventDefault();
+    showModal();
+  });
+  
+  modalStay.addEventListener('click', () => {
+    hideModal();
+    msgBox.innerHTML = "🎉 Subscription activated! (Trial starts now)";
+    if(cancelStepsDiv) cancelStepsDiv.style.display = 'block';
+  });
+  
+  modalLeave.addEventListener('click', () => {
+    hideModal();
+    msgBox.innerHTML = "😕 You declined the free gift. Maybe later? (we'll remind you every hour)";
+  });
+  
+  claimBtn.addEventListener('click', () => {
+    msgBox.innerHTML = "✅ Thanks! Your free trial is active. You have been subscribed.";
+    if(cancelStepsDiv) cancelStepsDiv.style.display = 'block';
+  });
+  
+  // ---- Card 2: pre-checked add-ons & hidden total ----
+  const checkout = document.getElementById('btnCheckout');
+  const extra1 = document.getElementById('chkExtra1');
+  const extra2 = document.getElementById('chkExtra2');
+  const checkoutMsg = document.getElementById('checkoutMsg');
+  
+  checkout.addEventListener('click', () => {
+    let total = 9.99;
+    let added = [];
+    if(extra1.checked) { total += 4.99; added.push("PrivacyShield (+$4.99)"); }
+    let cycle = "monthly";
+    if(extra2.checked) {
+      total = (total * 12).toFixed(2);
+      cycle = "yearly (auto-renew)";
+      added.push("Yearly commitment auto-renew");
+    } else {
+      total = total.toFixed(2);
+    }
+    checkoutMsg.innerHTML = `⚠️ Total: $${total} / ${cycle} including selected add-ons. You agree to recurring billing.`;
+  });
+  
+  // ---- Card 3: cancellation maze (roach motel) ----
+  const startCancel = document.getElementById('startCancelBtn');
+  const step1Div = document.getElementById('stepA');
+  const step2Div = document.getElementById('stepB');
+  const step3Div = document.getElementById('stepC');
+  const nextStep1 = document.getElementById('stepNext1');
+  const stayOffer = document.getElementById('keepOffer');
+  const continueStep2 = document.getElementById('continueStep');
+  const finalCancelLink = document.getElementById('finalCancel');
+  const cancelResult = document.getElementById('cancelResultMsg');
+  
+  startCancel.addEventListener('click', () => {
+    cancelStepsDiv.style.display = 'block';
+    step1Div.style.display = 'block';
+    step2Div.style.display = 'none';
+    step3Div.style.display = 'none';
+    cancelResult.innerText = '';
+  });
+  nextStep1.addEventListener('click', () => {
+    step1Div.style.display = 'none';
+    step2Div.style.display = 'block';
+  });
+  stayOffer.addEventListener('click', () => {
+    cancelResult.innerText = "✅ Great choice! You kept your subscription (we knew you would).";
+    cancelStepsDiv.style.display = 'none';
+  });
+  continueStep2.addEventListener('click', () => {
+    step2Div.style.display = 'none';
+    step3Div.style.display = 'block';
+  });
+  finalCancelLink.addEventListener('click', () => {
+    cancelResult.innerText = "❌ Subscription cancelled after 3 steps. BUT hidden reactivation fee may apply later.";
+    setTimeout(() => {
+      if(confirm("Did you know? Reactivating costs $5 fee. Click OK to restore subscription?")) {
+        cancelResult.innerText = "Subscription restored! You are now billed again.";
+      }
+    }, 300);
+  });
+  
+  // ---- Card 4: false urgency, fake stock, fake viewers ----
+  let remainingSec = 202;
+  const timerElem = document.getElementById('timerDisplay');
+  const stockSpan = document.getElementById('stockCount');
+  const viewerSpan = document.getElementById('viewerCount');
+  let timerIntervalId;
+  let currentStock = 3;
+  stockSpan.innerText = currentStock;
+  
+  function updateTimerUI() {
+    if(remainingSec <= 0) {
+      timerElem.innerText = "🔥 Offer expired! But refresh to see new timer 🔥";
+      if(timerIntervalId) clearInterval(timerIntervalId);
+      return;
+    }
+    let hrs = Math.floor(remainingSec / 3600);
+    let mins = Math.floor((remainingSec % 3600) / 60);
+    let secs = remainingSec % 60;
+    timerElem.innerText = `🔥 Offer ends in ${hrs.toString().padStart(2,'0')}:${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')} 🔥`;
+    remainingSec--;
+  }
+  function startTimerFn() { if(timerIntervalId) clearInterval(timerIntervalId); timerIntervalId = setInterval(updateTimerUI, 1000); }
+  startTimerFn();
+  
+  function updateStockDisplay() {
+    stockSpan.innerText = currentStock;
+    if(currentStock <= 0) stockSpan.innerText = "0 (sold out, but you can still buy?)";
+  }
+  setInterval(() => {
+    let newView = Math.floor(Math.random() * 45) + 18;
+    viewerSpan.innerText = newView;
+  }, 3800);
+  
+  const buyBtn = document.getElementById('buyNowTrigger');
+  buyBtn.addEventListener('click', () => {
+    if(currentStock > 0) currentStock--;
+    updateStockDisplay();
+    alert("Purchase simulated. Your card will be charged full price + $9.99 surprise fee.");
+  });
+  
+  const resetTimerLink = document.getElementById('resetTimer');
+  resetTimerLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    remainingSec = 202;
+    startTimerFn();
+    currentStock = 5;
+    updateStockDisplay();
+  });
+  
+  // ---- Card 5: tricky opt-out (forced action) ----
+  const shareCb = document.getElementById('optDataShare');
+  const sellCb = document.getElementById('optDataSell');
+  const savePrefs = document.getElementById('saveSettings');
+  const prefFeedback = document.getElementById('settingsFeedback');
+  
+  savePrefs.addEventListener('click', () => {
+    if(!shareCb.checked) {
+      prefFeedback.innerHTML = "⚠️ You cannot disable 'Share my data' without upgrading to Premium Privacy Plan ($19.99/mo). Re-enabling now.";
+      shareCb.checked = true;
+      return;
+    }
+    if(!sellCb.checked) {
+      prefFeedback.innerHTML = "⚠️ Unchecking 'sell data' will reduce your discount tier. We've reset to default (opt-in).";
+      sellCb.checked = true;
+    } else {
+      prefFeedback.innerHTML = "Preferences saved! We will still share anonymized data with 200+ partners.";
+    }
+  });
+})();
+</script>
+</body>
+</html>

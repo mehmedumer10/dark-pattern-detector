@@ -1,0 +1,372 @@
+/* Dark Pattern Detector Styles - Enhanced Visibility */
+
+/* Highlight for detected elements */
+.dark-pattern-detected {
+    position: relative !important;
+    outline: 4px solid #ff3366 !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.4) !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    z-index: 10000 !important;
+    background-color: rgba(255, 51, 102, 0.05) !important;
+}
+
+.dark-pattern-detected:hover {
+    outline-width: 5px !important;
+    box-shadow: 0 0 0 5px rgba(255, 51, 102, 0.6) !important;
+    background-color: rgba(255, 51, 102, 0.1) !important;
+}
+
+/* Badge for detected elements - Improved visibility */
+.dark-pattern-badge {
+    position: absolute !important;
+    top: -28px !important;
+    right: 0 !important;
+    background: linear-gradient(135deg, #ff3366, #cc0044) !important;
+    color: white !important;
+    font-size: 12px !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace !important;
+    font-weight: bold !important;
+    padding: 4px 12px !important;
+    border-radius: 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    z-index: 10001 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+    pointer-events: none !important;
+    white-space: nowrap !important;
+    letter-spacing: 0.5px !important;
+    backdrop-filter: blur(4px) !important;
+}
+
+.dark-pattern-badge .badge-icon {
+    font-size: 14px !important;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2)) !important;
+}
+
+.dark-pattern-badge .badge-text {
+    font-size: 11px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+}
+
+.dark-pattern-badge .badge-confidence {
+    background: rgba(0,0,0,0.4) !important;
+    padding: 2px 8px !important;
+    border-radius: 20px !important;
+    font-size: 10px !important;
+    font-weight: bold !important;
+}
+
+/* Highlight animation */
+.dark-pattern-highlight-animation {
+    animation: pulseGlow 0.6s ease-in-out 3 !important;
+}
+
+@keyframes pulseGlow {
+    0% { 
+        outline: 4px solid #ff3366;
+        box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.4);
+    }
+    50% { 
+        outline: 6px solid #ff6699;
+        box-shadow: 0 0 0 6px rgba(255, 51, 102, 0.8);
+    }
+    100% { 
+        outline: 4px solid #ff3366;
+        box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.4);
+    }
+}
+
+/* Modal Styles - Enhanced Visibility */
+.dark-pattern-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.85) !important;
+    backdrop-filter: blur(4px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 100000 !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif !important;
+    animation: fadeInModal 0.2s ease !important;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.dark-pattern-modal .modal-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+    border-radius: 20px !important;
+    max-width: 550px !important;
+    width: 90% !important;
+    max-height: 85vh !important;
+    overflow-y: auto !important;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5) !important;
+    border: 2px solid #ff3366 !important;
+    animation: slideInModal 0.3s ease !important;
+}
+
+@keyframes slideInModal {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.dark-pattern-modal .modal-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 20px 24px !important;
+    border-bottom: 2px solid #ff3366 !important;
+    background: linear-gradient(135deg, #0f0f1a, #1a1a2e) !important;
+    border-radius: 20px 20px 0 0 !important;
+}
+
+.dark-pattern-modal .modal-header h3 {
+    margin: 0 !important;
+    color: #ff3366 !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.dark-pattern-modal .modal-close {
+    background: rgba(255, 51, 102, 0.2) !important;
+    border: 1px solid #ff3366 !important;
+    border-radius: 50% !important;
+    color: white !important;
+    font-size: 20px !important;
+    cursor: pointer !important;
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s !important;
+}
+
+.dark-pattern-modal .modal-close:hover {
+    background: #ff3366 !important;
+    transform: rotate(90deg) !important;
+}
+
+.dark-pattern-modal .modal-body {
+    padding: 24px !important;
+}
+
+.dark-pattern-modal .pattern-info {
+    margin-bottom: 24px !important;
+    padding: 16px !important;
+    background: rgba(255, 51, 102, 0.1) !important;
+    border-radius: 12px !important;
+    border-left: 4px solid #ff3366 !important;
+}
+
+.dark-pattern-modal .pattern-name {
+    color: #ffd966 !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+.dark-pattern-modal .confidence-meter {
+    margin: 16px 0 !important;
+}
+
+.dark-pattern-modal .confidence-meter span {
+    font-size: 13px !important;
+    color: #ccc !important;
+    display: block !important;
+    margin-bottom: 8px !important;
+}
+
+.dark-pattern-modal .confidence-bar {
+    background: #2a2a3e !important;
+    height: 12px !important;
+    border-radius: 6px !important;
+    margin: 8px 0 !important;
+    overflow: hidden !important;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3) !important;
+}
+
+.dark-pattern-modal .confidence-fill {
+    background: linear-gradient(90deg, #ff3366, #ff6699) !important;
+    height: 100% !important;
+    border-radius: 6px !important;
+    transition: width 0.5s ease !important;
+    box-shadow: 0 0 8px rgba(255, 51, 102, 0.5) !important;
+}
+
+.dark-pattern-modal .confidence-value {
+    font-size: 16px !important;
+    font-weight: bold !important;
+    color: #ffd966 !important;
+    margin-top: 8px !important;
+    display: inline-block !important;
+}
+
+.dark-pattern-modal .detected-text {
+    background: #0f0f1a !important;
+    padding: 12px !important;
+    border-radius: 10px !important;
+    margin-top: 12px !important;
+    font-size: 13px !important;
+    border-left: 3px solid #ff3366 !important;
+    color: #e0e0e0 !important;
+    line-height: 1.5 !important;
+}
+
+.dark-pattern-modal .detected-text strong {
+    color: #ffd966 !important;
+    display: block !important;
+    margin-bottom: 8px !important;
+}
+
+.dark-pattern-modal .laws-section {
+    margin: 20px 0 !important;
+    padding: 16px !important;
+    background: #0f0f1a !important;
+    border-radius: 12px !important;
+}
+
+.dark-pattern-modal .laws-section h4 {
+    margin: 0 0 16px 0 !important;
+    color: #ffd966 !important;
+    font-size: 16px !important;
+    border-bottom: 1px solid #ff3366 !important;
+    padding-bottom: 8px !important;
+}
+
+.dark-pattern-modal .law-item {
+    margin-bottom: 16px !important;
+    padding: 12px !important;
+    background: #1a1a2e !important;
+    border-radius: 10px !important;
+    border-left: 3px solid #ff3366 !important;
+}
+
+.dark-pattern-modal .law-item strong {
+    color: #ff6699 !important;
+    font-size: 14px !important;
+    display: block !important;
+    margin-bottom: 8px !important;
+}
+
+.dark-pattern-modal .law-item ul {
+    margin: 8px 0 !important;
+    padding-left: 20px !important;
+}
+
+.dark-pattern-modal .law-item li {
+    color: #ccc !important;
+    font-size: 12px !important;
+    margin-bottom: 4px !important;
+}
+
+.dark-pattern-modal .violation-desc {
+    font-size: 12px !important;
+    color: #aaa !important;
+    margin: 8px 0 0 0 !important;
+    font-style: italic !important;
+    padding-top: 8px !important;
+    border-top: 1px solid #2a2a3e !important;
+}
+
+.dark-pattern-modal .warning-message {
+    background: rgba(255, 51, 102, 0.15) !important;
+    border: 1px solid #ff3366 !important;
+    padding: 16px !important;
+    border-radius: 12px !important;
+    margin-top: 20px !important;
+}
+
+.dark-pattern-modal .warning-message strong {
+    color: #ff6699 !important;
+    display: block !important;
+    margin-bottom: 10px !important;
+    font-size: 14px !important;
+}
+
+.dark-pattern-modal .warning-message p {
+    margin: 0 !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    color: #e0e0e0 !important;
+}
+
+.dark-pattern-modal .modal-footer {
+    padding: 16px 24px !important;
+    border-top: 1px solid #2a2a3e !important;
+    display: flex !important;
+    gap: 12px !important;
+    justify-content: flex-end !important;
+    background: #0f0f1a !important;
+    border-radius: 0 0 20px 20px !important;
+}
+
+.dark-pattern-modal .btn-ignore,
+.dark-pattern-modal .btn-close {
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    border: none !important;
+    cursor: pointer !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s !important;
+}
+
+.dark-pattern-modal .btn-ignore {
+    background: #2a2a3e !important;
+    color: white !important;
+    border: 1px solid #ff3366 !important;
+}
+
+.dark-pattern-modal .btn-ignore:hover {
+    background: #ff3366 !important;
+    transform: translateY(-2px) !important;
+}
+
+.dark-pattern-modal .btn-close {
+    background: linear-gradient(135deg, #ff3366, #cc0044) !important;
+    color: white !important;
+}
+
+.dark-pattern-modal .btn-close:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(255, 51, 102, 0.4) !important;
+}
+
+/* Scrollbar Styling */
+.dark-pattern-modal .modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dark-pattern-modal .modal-content::-webkit-scrollbar-track {
+    background: #1a1a2e;
+    border-radius: 4px;
+}
+
+.dark-pattern-modal .modal-content::-webkit-scrollbar-thumb {
+    background: #ff3366;
+    border-radius: 4px;
+}
+
+.dark-pattern-modal .modal-content::-webkit-scrollbar-thumb:hover {
+    background: #ff6699;
+}
